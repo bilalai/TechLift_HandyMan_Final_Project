@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div style="text-align:right">
+    <a class="btn btn-success" asp-action="Create" asp-controller="MyUsers">Register</a>
+    <a class="btn btn-primary" asp-action="login" asp-controller="MyUsers">Login</a>
+</div>
+<div class="text-center">
+    <h1 class="display-4">Welcome To</h1>
+
+ 
+    <h1><span class="text blue">Mistri</span> for Everyone</h1>
+
+
+
+
+
+    <script>
+
+        const words = ["Mistri", "Mistri", "Mistri", "Mistri", "Mistri", "Mistri"],
+            colors = ["Mistri", "Mistri", "Mistri", "Mistri", "Mistri", "Mistri"],
+            text = document.querySelector(".text");
+
+        // Generator (iterate from 0-3)
+        function* generator() {
+            var index = 0;
+            while (true) {
+                yield index++;
+
+                if (index > 6) {
+                    index = 0;
+                }
+            }
+        }
+
+
+
+
+        // Printing effect
+        function printChar(word) {
+            let i = 0;
+            text.innerHTML = "";
+            text.classList.add(colors[words.indexOf(word)]);
+            let id = setInterval(() => {
+                if (i >= word.length) {
+                    deleteChar();
+                    clearInterval(id);
+                } else {
+                    text.innerHTML += word[i];
+                    i++;
+                }
+            }, 400);
+        }
+
+        // Deleting effect
+        function deleteChar() {
+            let word = text.innerHTML;
+            let i = word.length - 1;
+            let id = setInterval(() => {
+                if (i >= 0) {
+                    text.innerHTML = text.innerHTML.substring(0, text.innerHTML.length - 1);
+                    i--;
+                } else {
+                    text.classList.remove(colors[words.indexOf(word)]);
+                    printChar(words[gen.next().value]);
+                    clearInterval(id);
+                }
+            }, 400);
+        }
+
+        // Initializing generator
+        let gen = generator();
+
+        printChar(words[gen.next().value]);
+
+
+    </script>
+
+    <img src="~/Admin/images/slider_main.png" />
+
+
+
+</div>
